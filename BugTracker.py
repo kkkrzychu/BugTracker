@@ -20,8 +20,14 @@ while True:
                                  f"\n1. {priority[0]}"\
                                  f"\n2. {priority[1]}"\
                                  f"\n3. {priority[2]}")
-            bug_description = input("Podaj opis błędu: ")
-            bugs.append({"tytul": bug_title, "priorytet": bug_priority, "opis": bug_description})
+
+            if bug_priority != priority[0] and bug_priority != priority[1] and bug_priority != priority[2]:
+                print("Niepoprawny priorytet")
+                break
+
+            else:
+                bug_description = input("Podaj opis błędu: ")
+                bugs.append({"tytul": bug_title, "priorytet": bug_priority, "opis": bug_description})
 
         
 
@@ -40,8 +46,7 @@ while True:
 
     elif opcja == "3":
             print("Wyjście z programu...")
-            break
-            # Tutaj można dodać kod do zakończenia programu    
+            break  
 
     else: 
             print("Nieprawidłowa opcja. Spróbuj ponownie.") 
