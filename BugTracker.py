@@ -1,5 +1,5 @@
 bugs = []
-priority = ["Low", "Medium", "High"]
+priorities = ["Low", "Medium", "High"]
 
 while True:
 
@@ -14,20 +14,24 @@ while True:
 
     if opcja == "1":
             
-            print("Dodawanie błędu ")
-            bug_title = input("Podaj tytul bledu: ")
-            bug_priority = input(f"\nWybierz priorytet błędu: "\
-                                 f"\n1. {priority[0]}"\
-                                 f"\n2. {priority[1]}"\
-                                 f"\n3. {priority[2]}")
+        print("Dodawanie błędu ")
+        bug_title = input("Podaj tytul bledu: ")
 
-            if bug_priority != priority[0] and bug_priority != priority[1] and bug_priority != priority[2]:
-                print("Niepoprawny priorytet")
-                break
 
-            else:
-                bug_description = input("Podaj opis błędu: ")
-                bugs.append({"tytul": bug_title, "priorytet": bug_priority, "opis": bug_description})
+
+        while True:
+                bug_priority = input(f"\nWybierz priorytet błędu: "\
+                        f"\n1. {priorities[0]}"\
+                        f"\n2. {priorities[1]}"\
+                        f"\n3. {priorities[2]}")
+
+                if bug_priority not in priorities: 
+                        print("Niepoprawny priorytet")  
+
+                else:                
+                        bug_description = input("Podaj opis błędu: ")
+                        bugs.append({"tytul": bug_title, "priorytet": bug_priority, "opis": bug_description})
+                        break
 
         
 
