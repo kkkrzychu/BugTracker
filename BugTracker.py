@@ -20,20 +20,35 @@ while True:
 
 
         while True:
+
+                print("\n Wybierz priorytet błędu:")
+                '''
                 bug_priority = input(f"\nWybierz priorytet błędu: "\
                         f"\n1. {priorities[0]}"\
                         f"\n2. {priorities[1]}"\
                         f"\n3. {priorities[2]}")
+                '''
 
-                if bug_priority not in priorities: 
-                        print("Niepoprawny priorytet")  
+                for priority in priorities:
+                       print (priority)
 
-                else:                
-                        bug_description = input("Podaj opis błędu: ")
-                        bugs.append({"tytul": bug_title, "priorytet": bug_priority, "opis": bug_description})
-                        break
+                try:
+                        bug_priority = int(input())
 
-        
+                        '''
+                        if bug_priority not in priorities: 
+                                print("Niepoprawny priorytet")  
+                        '''
+                        if bug_priority not in [1,2,3]:
+                               
+
+                        else:                
+                                bug_description = input("Podaj opis błędu: ")
+                                bugs.append({"tytul": bug_title, "priorytet": bug_priority, "opis": bug_description})
+                                break
+
+                except ValueError:
+                       print("Niepoprawny priorytet, spróbuj ponownie")
 
     elif opcja == "2":
             if not bugs:
