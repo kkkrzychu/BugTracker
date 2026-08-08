@@ -16,35 +16,22 @@ while True:
             
         print("Dodawanie błędu ")
         bug_title = input("Podaj tytul bledu: ")
-
-
-
+        
         while True:                
-                i = 1
+                
                 print("\n Wybierz priorytet błędu:")
-                '''
-                bug_priority = input(f"\nWybierz priorytet błędu: "\
-                        f"\n1. {priorities[0]}"\
-                        f"\n2. {priorities[1]}"\
-                        f"\n3. {priorities[2]}")
-                '''
 
-                for priority in priorities:                       
+                for i, priority in enumerate(priorities, start = 1):                       
                        print (f"{i}. ", priority)
                        i = i + 1
 
                 try:
                         wybor = int(input())
-
-                        '''
-                        if bug_priority not in priorities: 
-                                print("Niepoprawny priorytet")  
-                        '''
-                        if wybor not in [1,2,3]:
+                        
+                        if wybor < 1 or wybor > len(priorities):
                                print("Niepoprawny priorytet, spróbuj ponownie")
 
-                        else:                
-                                
+                        else:                                               
                                 bug_description = input("Podaj opis błędu: ")
                                 bugs.append({"tytul": bug_title, "priorytet": priorities[wybor-1], "opis": bug_description})
                                 break
@@ -62,8 +49,7 @@ while True:
                         print(f"\nBUG #{i}")
                         print(f"\nTytuł: {bug['tytul']}")
                         print(f"\nPriorytet: {bug['priorytet']}")
-                        print(f"\nOpis: {bug['opis']}")
-            
+                        print(f"\nOpis: {bug['opis']}")        
 
     elif opcja == "3":
             print("Wyjście z programu...")
