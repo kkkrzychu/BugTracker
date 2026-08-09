@@ -1,7 +1,38 @@
+
+
 bugs = []
 priorities = ["Low", "Medium", "High"]
 
+
+def add_bug():
+       
+       print("Dodawanie błędu")
+       bug_title = input("Podaj tytul błędu: ")
+
+       while True:
+              print("\nWybierz priorytet błędu")
+
+              for i, priority in enumerate(priorities, start = 1):
+                print(f"{i}, ", priority)
+
+              try:
+                       wybor = int(input())
+
+                       if wybor < 1 or wybor > len(priorities):
+                              print("Niepoprawny priorytet, spróbuj ponownie")
+
+                       else:
+                              bug_description = input("Podaj opis błędu: ")
+                              bugs.append({"tytul": bug_title, "priorytet": priorities[wybor-1], "opis": bug_description})
+                              break
+
+              except ValueError:
+                     print("Niepoprawny priorytet, spróbuj ponownie")
+                     
+
+
 while True:
+    
 
     print("\n=== Bug Tracker ===\n\n" \
     "1. Dodaj błąd\n" \
@@ -13,17 +44,19 @@ while True:
     opcja = input()    
 
     if opcja == "1":
-            
+
+
+     add_bug()
+     '''               
         print("Dodawanie błędu ")
         bug_title = input("Podaj tytul bledu: ")
-        
+
         while True:                
                 
                 print("\n Wybierz priorytet błędu:")
 
                 for i, priority in enumerate(priorities, start = 1):                       
                        print (f"{i}. ", priority)
-                       i = i + 1
 
                 try:
                         wybor = int(input())
@@ -38,6 +71,8 @@ while True:
 
                 except ValueError:
                        print("Niepoprawny priorytet, spróbuj ponownie")
+
+'''
 
     elif opcja == "2":
             if not bugs:
