@@ -26,7 +26,7 @@ def add_bug():
               except ValueError:
                      print("Niepoprawny priorytet, spróbuj ponownie")
 
-def view_bug():
+def view_bugs():
       
       if not bugs:
             print("Brak zgłoszonych błędów. ")
@@ -37,14 +37,24 @@ def view_bug():
                         print(f"\nBUG #{i}")
                         print(f"\nTytuł: {bug['tytul']}")
                         print(f"\nPriorytet: {bug['priorytet']}")
-                        print(f"\nOpis: {bug['opis']}")        
+                        print(f"\nOpis: {bug['opis']}")
+
+def save_bugs():
+             
+       if not bugs:
+              print("Brak bugów do zapisania")
+
+       else:
+              with open("Bugs.txt", "a") as f:
+                     f.write(str(bugs))
 
 while True:    
 
     print("\n=== Bug Tracker ===\n\n" \
     "1. Dodaj błąd\n" \
     "2. Pokaż błędy\n" \
-    "3. Wyjdź\n" \
+    "3. Zapisz błędy\n"
+    "4. Wyjdź\n" \
     "\n"
     "Wybierz opcję: ")
 
@@ -54,9 +64,12 @@ while True:
            add_bug()
 
     elif opcja == "2":
-            view_bug()
+            view_bugs()
 
     elif opcja == "3":
+           save_bugs()
+
+    elif opcja == "4":
             print("Wyjście z programu...")
             break  
 
