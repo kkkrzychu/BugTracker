@@ -46,7 +46,7 @@ def save_bugs():
 
        else:
               with open("Bugs.txt", "a") as f:
-                     f.write(str(bugs))
+                     f.write(str(f"{bugs}\n"))
 
 while True:    
 
