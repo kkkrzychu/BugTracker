@@ -1,4 +1,8 @@
+import json
+
 bugs = []
+bugs_json = []
+bugs_parsed = []
 priorities = ["Low", "Medium", "High"]
 
 def add_bug():
@@ -46,7 +50,16 @@ def save_bugs():
 
        else:
               with open("Bugs.txt", "a") as f:
-                     f.write(str(f"{bugs}\n"))
+                     bugs_json = json.dumps(bugs)
+                     f.write(str(f"{bugs_json}\n"))
+                     f.close()
+
+def load_bugs():    
+       
+       with open("Bugs.txt") as f:
+              bugs_parsed = json.loads(bugs_json)
+              print(bugs_parsed)
+              f.close()
 
 while True:    
 
@@ -64,6 +77,7 @@ while True:
            add_bug()
 
     elif opcja == "2":
+            load_bugs()
             view_bugs()
 
     elif opcja == "3":
