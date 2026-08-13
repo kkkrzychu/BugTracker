@@ -33,7 +33,7 @@ def add_bug():
 def view_bugs():
       
       if not bugs:
-            print("Brak zgłoszonych błędów. ")
+            print("Brak nowo zgłoszonych błędów. ")
 
       else:
             print("Wyświetlanie błędów...")
@@ -46,21 +46,24 @@ def view_bugs():
 def save_bugs():
              
        if not bugs:
-              print("Brak bugów do zapisania")
+              print("Brak nowych bugów do zapisania")
 
        else:
               with open("Bugs.txt", "w") as f:
                      bugs_json = json.dumps(bugs)
-                     f.write(str(f"{bugs_json}\n"))
-                     f.close()
+                     f.write(bugs_json)
 
 def load_bugs():    
+
+       print("Dotychczas zapisane błędy: ")
        
        with open("Bugs.txt") as f:
               bugs_json = f.read()
               bugs_parsed = json.loads(bugs_json)
               bugs = bugs_parsed
-              print(bugs)
+              #print(bugs)
+
+       return bugs
 
 while True:    
 
@@ -78,7 +81,8 @@ while True:
            add_bug()
 
     elif opcja == "2":
-            load_bugs()
+            bugs = load_bugs()
+            print(bugs)
             view_bugs()
 
     elif opcja == "3":
