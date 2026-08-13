@@ -1,7 +1,7 @@
 import json
 
 bugs = []
-bugs_json = []
+#bugs_json = []
 bugs_parsed = []
 priorities = ["Low", "Medium", "High"]
 
@@ -49,7 +49,7 @@ def save_bugs():
               print("Brak bugów do zapisania")
 
        else:
-              with open("Bugs.txt", "a") as f:
+              with open("Bugs.txt", "w") as f:
                      bugs_json = json.dumps(bugs)
                      f.write(str(f"{bugs_json}\n"))
                      f.close()
@@ -57,6 +57,7 @@ def save_bugs():
 def load_bugs():    
        
        with open("Bugs.txt") as f:
+              bugs_json = f.read()
               bugs_parsed = json.loads(bugs_json)
               print(bugs_parsed)
               f.close()
