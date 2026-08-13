@@ -1,7 +1,7 @@
 import json
 
 bugs = []
-#bugs_json = []
+bugs_json = []
 bugs_parsed = []
 priorities = ["Low", "Medium", "High"]
 
@@ -59,8 +59,8 @@ def load_bugs():
        with open("Bugs.txt") as f:
               bugs_json = f.read()
               bugs_parsed = json.loads(bugs_json)
-              print(bugs_parsed)
-              f.close()
+              bugs = bugs_parsed
+              print(bugs)
 
 while True:    
 
