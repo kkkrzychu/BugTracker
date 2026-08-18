@@ -1,13 +1,12 @@
 import json
 
 bugs = []
-bugs_json = []
-bugs_parsed = []
 priorities = ["Low", "Medium", "High"]
 
 def add_bug():
        
        print("Dodawanie błędu")
+       bug_id = len(bugs) + 1
        bug_title = input("Podaj tytul błędu: ")
 
        while True:
@@ -24,7 +23,11 @@ def add_bug():
 
                        else:
                               bug_description = input("Podaj opis błędu: ")
-                              bugs.append({"tytul": bug_title, "priorytet": priorities[wybor-1], "opis": bug_description})
+                              bugs.append({"tytul": bug_title,
+                                            "priorytet": priorities[wybor-1], 
+                                            "opis": bug_description,
+                                            "ID": bug_id
+                                            })
                               break
 
               except ValueError:
@@ -38,10 +41,13 @@ def view_bugs():
       else:
             print("Wyświetlanie błędów...")
             for i, bug in enumerate(bugs, start = 1):
-                        print(f"\nBUG #{i}")
+                        #print(f"\nBUG #{i}")
+                        #print(f"\nBUG #{bug['ID']}")
                         print(f"\nTytuł: {bug['tytul']}")
                         print(f"\nPriorytet: {bug['priorytet']}")
                         print(f"\nOpis: {bug['opis']}")
+
+            #print(bugs)
 
 def save_bugs():
              
@@ -50,23 +56,20 @@ def save_bugs():
 
        else:
               with open("Bugs.txt", "w") as f:
-                     bugs_json = json.dumps(bugs)
-                     f.write(bugs_json)
+                     json.dump(bugs, f)
 
 def load_bugs():    
-
-       print("Dotychczas zapisane błędy: ")
-       
+              
        with open("Bugs.txt") as f:
               bugs_json = f.read()
               bugs_parsed = json.loads(bugs_json)
-              bugs = bugs_parsed
-              #print(bugs)
 
-       return bugs
+       return bugs_parsed
 
-while True:    
+while True:
 
+    bugs = load_bugs()
+ 
     print("\n=== Bug Tracker ===\n\n" \
     "1. Dodaj błąd\n" \
     "2. Pokaż błędy\n" \
@@ -81,8 +84,6 @@ while True:
            add_bug()
 
     elif opcja == "2":
-            bugs = load_bugs()
-            print(bugs)
             view_bugs()
 
     elif opcja == "3":
