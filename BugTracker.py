@@ -68,9 +68,7 @@ def load_bugs():
                      bugs_json = f.read()
                      bugs_parsed = json.loads(bugs_json)
        except FileNotFoundError: 
-              with open("Bugs.txt") as f:
-                     bugs_json = f.read()
-                     bugs_parsed = json.loads(bugs_json)
+                     return []
 
        return bugs_parsed
 
