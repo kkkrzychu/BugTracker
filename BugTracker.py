@@ -1,9 +1,12 @@
+import json
+
 bugs = []
 priorities = ["Low", "Medium", "High"]
 
 def add_bug():
        
        print("Dodawanie błędu")
+       bug_id = len(bugs) + 1
        bug_title = input("Podaj tytul błędu: ")
 
        while True:
@@ -13,34 +16,68 @@ def add_bug():
                 print(f"{i}. ", priority)
 
               try:
-                       wybor = int(input())
+                     wybor = int(input())
 
-                       if wybor < 1 or wybor > len(priorities):
-                              print("Niepoprawny priorytet, spróbuj ponownie")
+                     if wybor < 1 or wybor > len(priorities):
+                            print("Niepoprawny priorytet, spróbuj ponownie")
 
-                       else:
-                              bug_description = input("Podaj opis błędu: ")
-                              bugs.append({"tytul": bug_title, "priorytet": priorities[wybor-1], "opis": bug_description})
-                              break
+                     else:
+                            bug_description = input("Podaj opis błędu: ")
+                            bugs.append({"tytul": bug_title,
+                                          "priorytet": priorities[wybor-1], 
+                                          "opis": bug_description,
+                                          "ID": bug_id
+                                          })
+
+                            save_bugs()
+                            break
 
               except ValueError:
                      print("Niepoprawny priorytet, spróbuj ponownie")
 
-def view_bug():
+def view_bugs():
       
       if not bugs:
-            print("Brak zgłoszonych błędów. ")
+            print("Brak nowo zgłoszonych błędów. ")
 
       else:
             print("Wyświetlanie błędów...")
             for i, bug in enumerate(bugs, start = 1):
-                        print(f"\nBUG #{i}")
+                        #print(f"\nBUG #{i}")
+                        #print(f"\nBUG #{bug['ID']}")
                         print(f"\nTytuł: {bug['tytul']}")
                         print(f"\nPriorytet: {bug['priorytet']}")
-                        print(f"\nOpis: {bug['opis']}")        
+                        print(f"\nOpis: {bug['opis']}")
 
-while True:    
+            #print(bugs)
 
+def save_bugs():
+             
+       if not bugs:
+              print("Brak nowych bugów do zapisania")
+
+       else:
+              with open("Bugs.txt", "w") as f:
+                     json.dump(bugs, f)
+
+def load_bugs():    
+
+       
+       try:      
+              with open("Bugs.txt") as f:
+                     bugs_json = f.read()
+                     bugs_parsed = json.loads(bugs_json)
+       except FileNotFoundError: 
+                     return []
+
+       return bugs_parsed
+
+bugs = load_bugs()
+
+while True:
+
+    
+ 
     print("\n=== Bug Tracker ===\n\n" \
     "1. Dodaj błąd\n" \
     "2. Pokaż błędy\n" \
@@ -54,7 +91,7 @@ while True:
            add_bug()
 
     elif opcja == "2":
-            view_bug()
+            view_bugs()
 
     elif opcja == "3":
             print("Wyjście z programu...")
