@@ -60,8 +60,7 @@ def save_bugs():
               with open("Bugs.txt", "w") as f:
                      json.dump(bugs, f)
 
-def load_bugs():    
-
+def load_bugs():
        
        try:      
               with open("Bugs.txt") as f:
@@ -70,7 +69,10 @@ def load_bugs():
        except FileNotFoundError: 
                      return []
 
-       return bugs_parsed
+       return bugs_parsed 
+
+def delete_bug():
+       
 
 bugs = load_bugs()
 
