@@ -1,4 +1,4 @@
-from bug_tracker import add_bug, view_bugs, delete_bug, update_bug
+from bug_tracker import add_bug, view_bugs, delete_bug, update_bug, search_bug
 
 while True:          
  
@@ -7,7 +7,8 @@ while True:
     "2. Pokaż błędy\n" \
     "3. Usuń błąd\n" \
     "4. Edytuj błąd\n" \
-    "5. Wyjdź\n" \
+    "5. Szukaj błędu\n" \
+    "6. Wyjdź\n" \
     "\n"
     "Wybierz opcję: ")
 
@@ -26,6 +27,9 @@ while True:
            update_bug()
 
     elif opcja == "5":
+           search_bug()
+
+    elif opcja == "6":
             print("Wyjście z programu...")
             break  
 

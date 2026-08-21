@@ -28,10 +28,7 @@ def view_bugs():
       else:
             print("Wyświetlanie błędów...")
             for bug in bugs:
-                        print(f"\nBUG #{bug['ID']}")
-                        print(f"\nTytuł: {bug['tytul']}")
-                        print(f"\nPriorytet: {bug['priorytet']}")
-                        print(f"\nOpis: {bug['opis']}")            
+                     display_bug(bug)        
 
 def delete_bug():
 
@@ -118,5 +115,80 @@ def choose_priority():
                                                         
               except ValueError:
                      print("Niepoprawny priorytet")
+
+def search_bug_title():
+
+       if not bugs:
+              print("Brak bugów.")
+              return
+       
+       title_to_search = input("Szukaj: ")
+       found = False
+
+       for bug in bugs:
+              if title_to_search.lower() in bug["tytul"].lower():
+                     display_bug(bug)
+                     found = True
+
+       if not found:
+              print("Nie znaleziono buga o takim tytule. ")
+
+def search_bug_id():
+
+       if not bugs:
+              print("Brak bugów.")
+              return
+
+       
+
+       found = False
+
+       try:
+              ID_to_search = int(input("Szukaj: "))
+
+              for bug in bugs:
+                     if ID_to_search == bug["ID"]:
+                            display_bug(bug)
+                            found = True
+                            break
+
+       except ValueError:
+              print("Niepoprawny ID")
+              return
+
+       if not found:
+              print("Nie znaleziono buga o takim ID")
+
+def search_bug():
+
+       while True:
+
+              print("\n=== Szukaj błędu ===\n\n" \
+                     "1. Szukaj błędu po ID\n" \
+                     "2. Szukaj błędu po tytule\n" \
+                     "3. Wyjdź\n" \
+                     "Wybierz opcję: ")
+
+              opcja = input()
+
+              if opcja == "1":
+                     search_bug_id()
+
+              elif opcja == "2":
+                     search_bug_title()
+
+              elif opcja == "3":
+                     return
+              
+              else:   
+                     print("Nieprawidłowa opcja, spróbuj ponownie: ")
+       
+
+def display_bug(bug):
+
+       print(f"\nBUG #{bug['ID']}")
+       print(f"\nTytuł: {bug['tytul']}")
+       print(f"\nPriorytet: {bug['priorytet']}")
+       print(f"\nOpis: {bug['opis']}")     
 
 bugs = load_bugs()
