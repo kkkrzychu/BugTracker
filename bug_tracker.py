@@ -2,6 +2,7 @@ from storage import save_bugs, load_bugs
 
 bugs = []
 priorities = ["Low", "Medium", "High"]
+statuses  = ["Open", "In Progress", "Closed"]
 
 def add_bug(): 
        
@@ -10,11 +11,13 @@ def add_bug():
        bug_title = input("Podaj tytul błędu: ")
        bug_priority = choose_priority()
        bug_description = input(" Podaj opis błędu ")
+       bug_status = choose_status()
        bug_id = get_next_ID()
 
        bugs.append({"tytul": bug_title,
                     "priorytet": bug_priority,
                     "opis": bug_description,
+                    "status":  bug_status,
                     "ID": bug_id 
                      })
 
@@ -68,7 +71,8 @@ def update_bug():
                             if bug["ID"] == id_to_update:
                                    
                                    bug["tytul"] = input("Nowy tytuł: ")
-                                   bug["priorytet"] = choose_priority()                                   
+                                   bug["priorytet"] = choose_priority()
+                                   bug["status"] = choose_status()                                
                                    bug["opis"] = input("Nowy opis: ")
                                    found = True
                                    save_bugs(bugs)
@@ -115,6 +119,25 @@ def choose_priority():
                                                         
               except ValueError:
                      print("Niepoprawny priorytet")
+
+def choose_status():
+       while True:
+              print("\nWybierz status: ")
+
+              for i, status in enumerate(statuses, start = 1):
+                     print(f"{i}.", status)
+
+              try:
+                     wybor = int(input())
+
+                     if wybor <1 or wybor > len(statuses):
+                            print("Niepoprawny status")
+
+                     else:
+                            return statuses[wybor - 1]
+
+              except ValueError:
+                     print("Niepoprawny status")
 
 def search_bug_title():
 
@@ -182,13 +205,13 @@ def search_bug():
               
               else:   
                      print("Nieprawidłowa opcja, spróbuj ponownie: ")
-       
 
 def display_bug(bug):
 
        print(f"\nBUG #{bug['ID']}")
        print(f"\nTytuł: {bug['tytul']}")
        print(f"\nPriorytet: {bug['priorytet']}")
-       print(f"\nOpis: {bug['opis']}")     
+       print(f"\nOpis: {bug['opis']}")
+       print(f"\nStatus: {bug['status']}")     
 
 bugs = load_bugs()

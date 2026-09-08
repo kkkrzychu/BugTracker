@@ -6,12 +6,16 @@ def save_bugs(bugs):
                      json.dump(bugs, f)
 
 def load_bugs():
-       
+
        try:      
               with open("Bugs.txt") as f:
                      bugs_json = f.read()
                      bugs_parsed = json.loads(bugs_json)
        except FileNotFoundError: 
                      return []
+
+       for bug in bugs_parsed:
+              if "status" not in bug:
+                     bug["status"] = "Open"              
 
        return bugs_parsed 
