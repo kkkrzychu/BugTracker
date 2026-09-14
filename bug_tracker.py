@@ -214,4 +214,50 @@ def display_bug(bug):
        print(f"\nOpis: {bug['opis']}")
        print(f"\nStatus: {bug['status']}")     
 
+def filter_by_status():
+
+       found = False
+
+       while True:
+              print("=== Filtruj Błędy ===")
+              print("1. Open")
+              print("2. In Progress")
+              print("3. Closed")
+
+              try:
+                     wybor = int(input())
+
+                     if wybor == 1:
+                            for bug in bugs:
+                                   if bug["status"] == "Open":
+                                          display_bug(bug)
+                                          found = True
+                                          return
+
+                     elif wybor == 2:
+                            for bug in bugs:                     
+                                   if bug["status"] == "In Progress":
+                                          display_bug(bug)
+                                          found = True
+                                          return
+                     elif wybor == 3:   
+                            for bug in bugs:                  
+                                   if bug["status"] == "Closed":
+                                          display_bug(bug)
+                                          found = True
+                                          return
+
+                     else:
+                            print("Nieprawidłowy wybór, spróbuj ponownie")
+
+                     
+
+              except ValueError:
+                     print("Niepoprawny wybor")
+                     return
+
+       if not found:
+              print("Nie znaleziono")
+
+
 bugs = load_bugs()
